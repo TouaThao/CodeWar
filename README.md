@@ -1,1 +1,1 @@
-A repository filled with codewars challenges (kata).
+A repository filled with codewars challenges. 
