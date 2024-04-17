@@ -10,6 +10,48 @@
 
 // The second value in the first pair in the array is 0, since the bus is empty in the first bus stop.
 
-var number = function (busStops) {
-  // Good Luck!
-};
+function busStops(array) {
+  let total = 0;
+  for (let i = 0; i < array.length; i++) {
+    total += array[i][0];
+    total -= array[i][1];
+  }
+  return total;
+}
+
+console.log(
+  busStops(
+    [
+      [10, 0],
+      [3, 5],
+      [5, 8],
+    ],
+    5
+  )
+);
+console.log(
+  busStops(
+    [
+      [3, 0],
+      [9, 1],
+      [4, 10],
+      [12, 2],
+      [6, 1],
+      [7, 10],
+    ],
+    17
+  )
+);
+console.log(
+  busStops(
+    [
+      [3, 0],
+      [9, 1],
+      [4, 8],
+      [12, 2],
+      [6, 1],
+      [7, 8],
+    ],
+    21
+  )
+);
