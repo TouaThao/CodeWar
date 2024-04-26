@@ -16,5 +16,40 @@
 // Return string of letters left on the battlefield after the last airstrike. In case there is no any letter left in reinforces on specific position, return _.
 
 function alphabetWar(reinforces, airstrikes) {
-  return "codewars";
+  let battlefield = reinforces[0].split("");
+
+  for (let strike of airstrikes) {
+    let hit = new Array(battlefield.length).fill(false);
+
+    for (let i = 0; i < strike.length; i++) {
+      if (strike[i] === "*") {
+        hit[Math.max(0, i - 1)] = true;
+        hit[i] = true;
+        if (i + 1 < battlefield.length) hit[i + 1] = true;
+      }
+    }
+
+    for (let i = 0; i < battlefield.length; i++) {
+      if (hit[i]) {
+        battlefield[i] = "_";
+      }
+    }
+
+    for (let i = 0; i < battlefield.length; i++) {
+      if (battlefield[i] === "_") {
+        for (let j = 1; j < reinforces.length; j++) {
+          if (reinforces[j][i] !== "_") {
+            battlefield[i] = reinforces[j][i];
+            reinforces[j] =
+              reinforces[j].substring(0, i) +
+              "_" +
+              reinforces[j].substring(i + 1);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  return battlefield.join("");
 }
