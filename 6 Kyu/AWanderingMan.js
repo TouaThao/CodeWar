@@ -45,9 +45,27 @@
 // wanders around under a rainy or sunny sky for a bit (potentially needing, or not needing, an umbrella) and returns to the location.
 
 function requiredUmbrellas(travels) {
-  return travels;
-}
+  const res = { home: 0 };
+  const actual = { home: 0 };
+  let prevPlace = "home";
 
+  for (let [place, weather] of travels) {
+    res[place] ??= 0;
+    actual[place] ??= 0;
+
+    if (weather === "rainy") {
+      if (actual[prevPlace] === 0) {
+        res[prevPlace]++;
+        actual[prevPlace]++;
+      }
+      actual[prevPlace]--;
+      actual[place]++;
+    }
+    prevPlace = place;
+  }
+
+  return res;
+}
 // console.log(
 //   requiredUmbrellas([
 //     ["work", "sunny"],
@@ -61,34 +79,34 @@ function requiredUmbrellas(travels) {
 //   }
 // );
 
-// console.log(
-//   requiredUmbrellas([
-//     ["work", "rainy"],
-//     ["home", "sunny"],
-//     ["work", "rainy"],
-//     ["gym", "rainy"],
-//     ["work", "sunny"],
-//     ["shop", "rainy"],
-//     ["work", "sunny"],
-//     ["shop", "rainy"],
-//   ]),
-//   {
-//     work: 1,
-//     shop: 0,
-//     gym: 0,
-//     home: 2,
-//   }
-// );
-
 console.log(
   requiredUmbrellas([
     ["work", "rainy"],
+    ["home", "sunny"],
+    ["work", "rainy"],
+    ["gym", "rainy"],
+    ["work", "sunny"],
     ["shop", "rainy"],
-    ["home", "rainy"],
+    ["work", "sunny"],
+    ["shop", "rainy"],
   ]),
   {
-    work: 0,
+    work: 1,
     shop: 0,
-    home: 1,
+    gym: 0,
+    home: 2,
   }
 );
+
+// console.log(
+//   requiredUmbrellas([
+//     ["work", "rainy"],
+//     ["shop", "rainy"],
+//     ["home", "rainy"],
+//   ]),
+//   {
+//     work: 0,
+//     shop: 0,
+//     home: 1,
+//   }
+// );
