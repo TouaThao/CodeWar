@@ -14,7 +14,16 @@
 // [4, 3, 1, 5, 6] should return [[1, 3], [3, 5], [4, 6]]
 
 function twosDifference(input) {
-  //Enter your solution here
+  let difference = 2;
+  let result = [];
+  for (let i = 0; i < input.length; i++) {
+    for (let j = i + 1; j < input.length; j++) {
+      if (Math.abs(input[i] - input[j]) === difference) {
+        result.push([input[i], input[j]]);
+      }
+    }
+  }
+  return result;
 }
 
 console.log(twosDifference([1, 2, 3, 4]), [
