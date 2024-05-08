@@ -16,10 +16,12 @@
 function twosDifference(input) {
   let difference = 2;
   let result = [];
+  input.sort((a, b) => a - b);
   for (let i = 0; i < input.length; i++) {
     for (let j = i + 1; j < input.length; j++) {
-      if (Math.abs(input[i] - input[j]) === difference) {
+      if (input[j] - input[i] === difference) {
         result.push([input[i], input[j]]);
+        break;
       }
     }
   }
