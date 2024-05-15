@@ -24,6 +24,7 @@
 // Note: your solution must not modify the input array.
 
 function score(dice) {
+  let total = 0;
   let map = {};
   for (let i = 0; i < dice.length; i++) {
     let number = dice[i];
@@ -32,24 +33,36 @@ function score(dice) {
     } else {
       map[number] += 1;
     }
-
-    Object.keys(map).forEach((number) => {});
+    Object.keys(map).forEach((number) => {
+      let num = parseInt(number);
+      if (map[num] >= 3) {
+        if (num === 1) {
+          total += 1000;
+        } else {
+          total += num * 100;
+        }
+        map[num] -= 3;
+      }
+    });
   }
-  return false;
+  total += (map[1] || 0) * 100;
+  total += (map[5] || 0) * 50;
+
+  return total;
 }
 console.log(
   "Testing score([2, 3, 4, 6, 2]): Expected 0, Got:",
   score([2, 3, 4, 6, 2])
 );
-// console.log(
-//   "Testing score([4, 4, 4, 3, 3]): Expected 400, Got:",
-//   score([4, 4, 4, 3, 3])
-// );
-// console.log(
-//   "Testing score([2, 4, 4, 5, 4]): Expected 450, Got:",
-//   score([2, 4, 4, 5, 4])
-// );
-// console.log(
-//   "Testing score([1, 1, 1, 3, 1]): Expected 1100, Got:",
-//   score([1, 1, 1, 3, 1])
-// );
+console.log(
+  "Testing score([4, 4, 4, 3, 3]): Expected 400, Got:",
+  score([4, 4, 4, 3, 3])
+);
+console.log(
+  "Testing score([2, 4, 4, 5, 4]): Expected 450, Got:",
+  score([2, 4, 4, 5, 4])
+);
+console.log(
+  "Testing score([1, 1, 1, 3, 1]): Expected 1100, Got:",
+  score([1, 1, 1, 3, 1])
+);
