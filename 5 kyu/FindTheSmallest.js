@@ -19,3 +19,13 @@
 // 29917 is the smallest number gotten by taking 2 at index 0 and putting it at index 1 which gave 029917 which is the number 29917.
 
 // smallest(1000000) --> [1, 0, 6] or ...
+
+function smallest(n) {
+  // Your code
+}
+
+console.log(smallest(261235, [126235, 2, 0]));
+console.log(smallest(209917, [29917, 0, 1]));
+console.log(smallest(285365, [238565, 3, 1]));
+console.log(smallest(269045, [26945, 3, 0]));
+console.log(smallest(296837, [239687, 4, 1]));
