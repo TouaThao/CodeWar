@@ -20,10 +20,37 @@
 
 // smallest(1000000) --> [1, 0, 6] or ...
 
-function smallest(n) {
-  // Your code
-}
+function smallest(number) {
+  let digits = number.toString().split("");
+  let n = digits.length;
+  let minNumber = Number.MAX_SAFE_INTEGER;
+  let result = [parseInt(digits.join("")), 0, 0];
+  if (new Set(digits).size === 1) {
+    return result;
+  }
+  for (let i = 0; i < n; i++) {
+    let digitToMove = digits[i];
 
+    for (let j = 0; j < n; j++) {
+      if (i !== j) {
+        let newDigits = [...digits];
+        newDigits.splice(i, 1);
+        newDigits.splice(j, 0, digitToMove);
+        let newNumber = parseInt(newDigits.join(""));
+        if (
+          newNumber < minNumber ||
+          (newNumber === minNumber && i < result[1]) ||
+          (newNumber === minNumber && i === result[1] && j < result[2])
+        ) {
+          minNumber = newNumber;
+          result = [newNumber, i, j];
+        }
+      }
+    }
+  }
+
+  return result;
+}
 console.log(smallest(261235, [126235, 2, 0]));
 console.log(smallest(209917, [29917, 0, 1]));
 console.log(smallest(285365, [238565, 3, 1]));
